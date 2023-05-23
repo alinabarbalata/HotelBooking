@@ -66,6 +66,7 @@
             this.Controls.Add(this.dgvClients);
             this.Name = "AllClientsDataBase";
             this.Text = "AllClientsDataBase";
+            this.Load += new System.EventHandler(this.AllClientsDataBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClients)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

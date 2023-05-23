@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking
+namespace HotelBookingProject
 {
     internal class Client
     {
-        public int IdClient { get; set; }
+        public long IdClient { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }

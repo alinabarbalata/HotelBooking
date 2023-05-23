@@ -12,14 +12,16 @@ namespace HotelBookingProject
 {
     public partial class ReservationDataBase : Form
     {
-        public ReservationDataBase()
+        private long IdClient;
+        public ReservationDataBase(long idClient)
         {
+            IdClient = idClient;
             InitializeComponent();
         }
 
         private void btnAddReservation_Click(object sender, EventArgs e)
         {
-            ReservationForm reservationForm = new ReservationForm();
+            ReservationForm reservationForm = new ReservationForm(IdClient);
             reservationForm.ShowDialog();
         }
 

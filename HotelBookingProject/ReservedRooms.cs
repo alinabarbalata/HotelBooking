@@ -1,4 +1,4 @@
-﻿using HotelBooking;
+﻿using HotelBookingProject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +9,14 @@ namespace HotelBookingProject
 {
     internal class ReservedRooms
     {
-        public int IdReservedRooms { get; }
-        public int IdReservation { get; set; }
-        public int IdRoom { get; set; }
+        public long IdReservedRooms { get; set; }
+        public long IdReservation { get; set; }
+        public long IdRoom { get; set; }
 
-        ReservedRooms(Reservation reservation ,Room room)
+        public ReservedRooms(Reservation reservation ,long idRoom)
         {
             IdReservation = reservation.IdReservation;
-            IdRoom = room.IdRoom;
+            IdRoom = idRoom;
         }
     }
 }

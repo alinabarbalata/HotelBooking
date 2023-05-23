@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking
+namespace HotelBookingProject
 {
     internal class Room
     {
         #region Attributes
-        public int IdRoom { get; }
+        public long IdRoom { get; set; }
         private string roomName;
         private bool isAvailable;
         public string Description { get; set; }
         public float Price { get; set; }
-        public Type Type { get; set; }
+        private Type type;
         #endregion
 
         public string RoomName
@@ -32,22 +32,36 @@ namespace HotelBooking
         }
         public string GetAvailability()
         {
-            if (isAvailable == true) return "Yes";
-            else return "No";
+            if (isAvailable == true) return "Available";
+            else return "Not Available";
         }
         public void SetAvailability(bool value)
         {
             isAvailable = value;
         }
-
-
+        public string GetType()
+        {
+            if (type == Type.Single)
+                return "Single";
+            else if (type == Type.Double)
+                return "Double";
+            else if (type == Type.Suite)
+                return "Suite";
+            else
+                return "Deluxe";
+        }
+        public void SetType(Type type)
+        {
+            this.type = type;
+        }
         #region Constructor
-        public Room(string roomName, Type type, string description, float price)
+        
+        public Room(string roomName,Type type, string description, float price)
         {
             RoomName = roomName;
             SetAvailability(true);
             Description = description;
-            Type = type;
+            SetType(type);
             Price = price;
         }
         #endregion

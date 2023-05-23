@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,12 @@ namespace HotelBookingProject
 {
     public partial class RoomForm : Form
     {
+        private readonly List<Room> _rooms;
+        private string ConnectionString = "Data Source=DatabaseHotelBooking.db";
         public RoomForm()
         {
             InitializeComponent();
+            _rooms = new List<Room>();
         }
 
         private void tbName_Validating(object sender, CancelEventArgs e)
@@ -83,7 +88,20 @@ namespace HotelBookingProject
                     DialogResult result=MessageBox.Show("The description field wasn't completed. Proceed anyway?", "WARNING",
                         MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
                     if (result == DialogResult.Yes)
-                    {
+                    { 
+                        string roomName = tbName.Text;
+                        string description = "-";
+                        float price = float.Parse(tbPrice.Text);
+                        Type type = (Type)Enum.Parse(typeof(Type), cbType.Text);
+                        try
+                        {
+                            Room room = new Room(roomName, type, description, price);
+                            addRoom(room);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                         MessageBox.Show("Succesfully created a room!", "SUCCESS", MessageBoxButtons.OK,
                        MessageBoxIcon.Information);
                     }
@@ -100,6 +118,19 @@ namespace HotelBookingProject
                 }
                 else
                 {
+                    string roomName = tbName.Text;
+                    string description = tbDescription.Text;
+                    float price = float.Parse(tbPrice.Text);
+                    Type type = (Type)Enum.Parse(typeof(Type), cbType.SelectedItem.ToString());
+                    try
+                    {
+                        Room room = new Room(roomName, type, description, price);
+                        addRoom(room);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                     MessageBox.Show("Succesfully created a room!", "SUCCESS", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                 }
@@ -126,6 +157,24 @@ namespace HotelBookingProject
         private void tbDescription_Validated(object sender, EventArgs e)
         {
             informationProvider.Hide(tbDescription);
+        }
+
+        private void addRoom(Room room)
+        {
+            string query = "INSERT into Room(RoomName,Description,Price,Type,Availability) VALUES(@roomName,@description,@price,@type,@availability);select last_insert_rowid();";
+            using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@roomName", room.RoomName);
+                command.Parameters.AddWithValue("@description", room.Description);
+                command.Parameters.AddWithValue("@price", room.Price);
+                command.Parameters.AddWithValue("@type", room.GetType());
+                command.Parameters.AddWithValue("@availability", room.GetAvailability());
+                long id = (long)command.ExecuteScalar();
+                room.IdRoom = id;
+                _rooms.Add(room);
+            }
         }
     }
 }

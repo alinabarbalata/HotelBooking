@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking
+namespace HotelBookingProject
 {
     internal class Reservation
     {
-        public int IdReservation { get; }
+        public long IdReservation { get; set; }
         private Client client;
-        private int IdClient { get; }
-        private DateTime CheckIn { get; set; }
-        private DateTime CheckOut { get; set; }
+        private long IdClient { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
         public int Days { get; set; }
         public int TotalCost { get; }
 
@@ -33,11 +33,11 @@ namespace HotelBooking
         //    }
         //}//to modify
         #endregion
-        public Reservation(Client client, DateTime checkIn, DateTime checkOut)
+        public Reservation(long idClient, DateTime checkIn, DateTime checkOut)
         {
             CheckIn = checkIn;
             CheckOut = checkOut;
-            IdClient = client.IdClient;
+            IdClient = idClient;
         }
 
     }

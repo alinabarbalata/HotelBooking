@@ -60,7 +60,7 @@
             this.addRoomToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 36);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 33);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -77,19 +77,20 @@
             // addRoomToolStripMenuItem1
             // 
             this.addRoomToolStripMenuItem1.Name = "addRoomToolStripMenuItem1";
-            this.addRoomToolStripMenuItem1.Size = new System.Drawing.Size(270, 34);
+            this.addRoomToolStripMenuItem1.Size = new System.Drawing.Size(217, 34);
             this.addRoomToolStripMenuItem1.Text = "Add Room";
+            this.addRoomToolStripMenuItem1.Click += new System.EventHandler(this.addRoomToolStripMenuItem1_Click);
             // 
             // editRoomToolStripMenuItem
             // 
             this.editRoomToolStripMenuItem.Name = "editRoomToolStripMenuItem";
-            this.editRoomToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.editRoomToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
             this.editRoomToolStripMenuItem.Text = "Edit Room";
             // 
             // deleteRoomToolStripMenuItem
             // 
             this.deleteRoomToolStripMenuItem.Name = "deleteRoomToolStripMenuItem";
-            this.deleteRoomToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.deleteRoomToolStripMenuItem.Size = new System.Drawing.Size(217, 34);
             this.deleteRoomToolStripMenuItem.Text = "Delete Room";
             // 
             // label1
@@ -114,6 +115,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AllRoomsDataBase";
             this.Text = "AllRoomsDataBase";
+            this.Load += new System.EventHandler(this.AllRoomsDataBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -1,4 +1,4 @@
-﻿using HotelBooking;
+﻿using HotelBookingProject;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,14 +15,14 @@ namespace HotelBookingProject
 {
     public partial class ClientForm : Form
     {
-        private readonly List<Client> _clients;
-        private readonly List<Account> _accounts;
-        private const string ConnectionString = "Data Source=C:\\Users\\PC\\OneDrive\\Desktop\\alina\\HotelBookingProject\\DatabaseHotelBooking.db";
+        private readonly BindingList<Client> _clients;
+        private readonly BindingList<Account> _accounts;
+        private const string ConnectionString = "Data Source=DatabaseHotelBooking.db";
         public ClientForm()
         {
             InitializeComponent();
-            _clients = new List<Client>();
-            _accounts = new List<Account>();
+            _clients = new BindingList<Client>();
+            _accounts = new BindingList<Account>();
         }
 
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -166,13 +167,13 @@ namespace HotelBookingProject
                 //1. Add the new participant to the database
                 var command = new SQLiteCommand(query, connection);
                 command.Parameters.AddWithValue("@firstName", client.FirstName);
-                command.Parameters.AddWithValue("@firstName", client.LastName);
+                command.Parameters.AddWithValue("@lastName", client.LastName);
                 command.Parameters.AddWithValue("@birthDate", client.BirthDate);
                 command.Parameters.AddWithValue("@email", client.Email);
                 command.Parameters.AddWithValue("@phoneNumber", client.PhoneNumber);
 
-                //client.IdClient = (int)command.ExecuteScalar();
-                connection.Close();
+                long id = (long)command.ExecuteScalar();
+                client.IdClient = id;
                 //2. Add the new participants to the local collection
                 _clients.Add(client);
             }
@@ -180,8 +181,7 @@ namespace HotelBookingProject
 
         private void addAccount(Account account)
         {
-            var query = "INSERT into Account(Username,Password)" + "values(@username,@password);" +
-                "SELECT last_insert_rowid()";
+            var query = "INSERT into Account(Username,Password) values(@username,@password);SELECT last_insert_rowid()";
             using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
@@ -190,8 +190,8 @@ namespace HotelBookingProject
                 command.Parameters.AddWithValue("@username", account.Username);
                 command.Parameters.AddWithValue("@password", account.Password);
 
-                //account.IdAccount = (int)command.ExecuteScalar();
-                connection.Close();
+                long id= (long)command.ExecuteScalar();
+                account.IdAccount = id;
                 _accounts.Add(account);
             }
         }
