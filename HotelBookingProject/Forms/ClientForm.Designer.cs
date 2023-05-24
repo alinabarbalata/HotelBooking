@@ -222,6 +222,8 @@ namespace HotelBookingProject
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(300, 26);
             this.tbPassword.TabIndex = 13;
+            this.tbPassword.Validating += new System.ComponentModel.CancelEventHandler(this.tbPassword_Validating);
+            this.tbPassword.Validated += new System.EventHandler(this.tbPassword_Validated);
             // 
             // label6
             // 
@@ -241,13 +243,14 @@ namespace HotelBookingProject
             this.tbUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbUsername.Font = new System.Drawing.Font("Bookman Old Style", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUsername.Location = new System.Drawing.Point(146, 219);
             this.tbUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(300, 26);
             this.tbUsername.TabIndex = 15;
-            this.tbUsername.Text = "Create username";
+            this.tbUsername.Validating += new System.ComponentModel.CancelEventHandler(this.tbUsername_Validating);
+            this.tbUsername.Validated += new System.EventHandler(this.tbUsername_Validated);
             // 
             // label7
             // 

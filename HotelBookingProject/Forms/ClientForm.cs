@@ -15,16 +15,14 @@ namespace HotelBookingProject
 {
     public partial class ClientForm : Form
     {
-        private readonly BindingList<Client> _clients;
-        private readonly BindingList<Account> _accounts;
+        private long id;
         private const string ConnectionString = "Data Source=DatabaseHotelBooking.db";
         public ClientForm()
         {
             InitializeComponent();
-            _clients = new BindingList<Client>();
-            _accounts = new BindingList<Account>();
         }
 
+        #region Events
         private void ClientForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Hide();
@@ -89,14 +87,8 @@ namespace HotelBookingProject
             errorProvider.SetError (tbPhoneNumber, null);
         }
 
-
-
         private void cbTermsAndConditions_Validating(object sender, CancelEventArgs e)
         {
-            //if(!cbTermsAndConditions.Checked) {
-            //    errorProvider.SetError(cbTermsAndConditions, "ofofofof");
-            //    e.Cancel = true;
-            //}
         }
 
         private void btnSignUp_Click(object sender, EventArgs e)
@@ -126,8 +118,8 @@ namespace HotelBookingProject
                 Account account = new Account(username, password);
                 try
                 {
-                    addClient(client);
                     addAccount(account);
+                    addClient(client,id);
                 }
                 catch(Exception ex)
                 {
@@ -135,10 +127,10 @@ namespace HotelBookingProject
                 }
                 MessageBox.Show("The account was succesfully created!", "Success", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
+                ClearForm();
                 return;
             }
         }
-
 
         private void dtpBirthDate_Validated(object sender, EventArgs e)
         {
@@ -154,28 +146,55 @@ namespace HotelBookingProject
             }
         }
 
-        private void addClient(Client client)
+        private void tbUsername_Validating(object sender, CancelEventArgs e)
         {
-            var query = "insert into Client(FirstName,LastName,BirthDate,Email,PhoneNumber)" +
-                        " values(@firstName,@lastName,@birthDate,@email,@phoneNumber);  " +
+            if (tbUsername.Text.Length == 0)
+            {
+                e.Cancel = true;
+                errorProvider.SetError(tbUsername, "Required");
+            }
+        }
+
+        private void tbUsername_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbUsername, null);
+        }
+
+        private void tbPassword_Validating(object sender, CancelEventArgs e)
+        {
+            if (tbPassword.Text.Length == 0)
+            {
+                e.Cancel = true;
+                errorProvider.SetError(tbPassword, null);
+            }
+        }
+
+        private void tbPassword_Validated(object sender, EventArgs e)
+        {
+            errorProvider.SetError(tbPassword, null);
+        }
+        #endregion    
+
+        #region Methods
+        private void addClient(Client client,long idAccount)
+        {
+            var query = "insert into Client(IdAccount,FirstName,LastName,BirthDate,Email,PhoneNumber)" +
+                        " values(@idAccount,@firstName,@lastName,@birthDate,@email,@phoneNumber);  " +
                         "SELECT last_insert_rowid()";
    
             using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
-
-                //1. Add the new participant to the database
                 var command = new SQLiteCommand(query, connection);
+                command.Parameters.AddWithValue("@idAccount", idAccount);
                 command.Parameters.AddWithValue("@firstName", client.FirstName);
                 command.Parameters.AddWithValue("@lastName", client.LastName);
-                command.Parameters.AddWithValue("@birthDate", client.BirthDate);
+                command.Parameters.AddWithValue("@birthDate", client.BirthDate.ToShortDateString());
                 command.Parameters.AddWithValue("@email", client.Email);
                 command.Parameters.AddWithValue("@phoneNumber", client.PhoneNumber);
 
                 long id = (long)command.ExecuteScalar();
                 client.IdClient = id;
-                //2. Add the new participants to the local collection
-                _clients.Add(client);
             }
         }
 
@@ -190,10 +209,23 @@ namespace HotelBookingProject
                 command.Parameters.AddWithValue("@username", account.Username);
                 command.Parameters.AddWithValue("@password", account.Password);
 
-                long id= (long)command.ExecuteScalar();
+                id= (long)command.ExecuteScalar();
                 account.IdAccount = id;
-                _accounts.Add(account);
             }
         }
+
+        private void ClearForm()
+        {
+            tbLastName.Text= string.Empty;
+            tbFirstName.Text= string.Empty;
+            tbEmail.Text = string.Empty;
+            tbUsername.Text= string.Empty;
+            tbPassword.Text= string.Empty;
+            tbPhoneNumber.Text = string.Empty;
+            cbTermsAndConditions.Checked = false;
+            dtpBirthDate.Value= DateTime.Now;
+        }
+        #endregion
+
     }
 }

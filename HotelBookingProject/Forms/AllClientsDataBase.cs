@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
@@ -10,32 +11,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HotelBookingProject
-{ 
-    public partial class AllRoomsDataBase : Form
+{
+    public partial class AllClientsDataBase : Form
     {
         private const string ConnectionString = "Data Source=DatabaseHotelBooking.db";
-        public AllRoomsDataBase()
+        public AllClientsDataBase()
         {
             InitializeComponent();
         }
 
-        private void addRoomToolStripMenuItem1_Click(object sender, EventArgs e)
+        #region Events
+        private void AllClientsDataBase_Load(object sender, EventArgs e)
         {
-            RoomForm roomForm = new RoomForm();
-            roomForm.ShowDialog();
-        }
-
-        private void AllRoomsDataBase_Load(object sender, EventArgs e)
-        {
-            string query = "SELECT * FROM Room";
+            string query = "SELECT * FROM CLIENT";
             using (SQLiteConnection connection = new SQLiteConnection(ConnectionString))
             {
                 connection.Open();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter(query,connection);
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(query, connection);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
-                dgvRooms.DataSource = dataTable;
+                dgvClients.DataSource = dataTable;
             }
         }
+        #endregion
     }
 }

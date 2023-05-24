@@ -14,14 +14,13 @@ namespace HotelBookingProject
 {
     public partial class RoomForm : Form
     {
-        private readonly List<Room> _rooms;
         private string ConnectionString = "Data Source=DatabaseHotelBooking.db";
         public RoomForm()
         {
             InitializeComponent();
-            _rooms = new List<Room>();
         }
 
+        #region Events
         private void tbName_Validating(object sender, CancelEventArgs e)
         {
             if (tbName.Text.Length == 0)
@@ -53,22 +52,10 @@ namespace HotelBookingProject
         {
             errorProvider.SetError(tbPrice, null);
         }
-
-        private void AddComboBoxItems()
-        {
-            foreach(Type type  in Enum.GetValues(typeof(Type)))
-            {
-                //cbType.Items.Clear();
-                cbType.Items.Add(type);
-            }
-        }
-
         private void RoomForm_Load(object sender, EventArgs e)
         {
             AddComboBoxItems();
         }
-
-
         private void cbType_Validated(object sender, EventArgs e)
         {
             errorProvider.SetError(cbType, null);
@@ -133,6 +120,7 @@ namespace HotelBookingProject
                     }
                     MessageBox.Show("Succesfully created a room!", "SUCCESS", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                    this.Close();
                 }
             }
         }
@@ -159,6 +147,9 @@ namespace HotelBookingProject
             informationProvider.Hide(tbDescription);
         }
 
+        #endregion
+
+        #region Methods
         private void addRoom(Room room)
         {
             string query = "INSERT into Room(RoomName,Description,Price,Type,Availability) VALUES(@roomName,@description,@price,@type,@availability);select last_insert_rowid();";
@@ -173,8 +164,16 @@ namespace HotelBookingProject
                 command.Parameters.AddWithValue("@availability", room.GetAvailability());
                 long id = (long)command.ExecuteScalar();
                 room.IdRoom = id;
-                _rooms.Add(room);
             }
         }
+        private void AddComboBoxItems()
+        {
+            foreach (Type type in Enum.GetValues(typeof(Type)))
+            {
+                //cbType.Items.Clear();
+                cbType.Items.Add(type);
+            }
+        }
+        #endregion
     }
 }

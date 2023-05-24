@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HotelBookingProject
 {
-    internal enum Type
+    public enum Type
     {
         Single,
         Double,

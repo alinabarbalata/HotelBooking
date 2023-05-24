@@ -112,9 +112,6 @@ namespace HotelBookingProject
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clbRooms.FormattingEnabled = true;
-            this.clbRooms.Items.AddRange(new object[] {
-            "room1",
-            "room2"});
             this.clbRooms.Location = new System.Drawing.Point(153, 72);
             this.clbRooms.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.clbRooms.Name = "clbRooms";

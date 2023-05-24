@@ -51,84 +51,93 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="AllClientsDataBase.cs">
+    <Compile Include="Classes\Account.cs" />
+    <Compile Include="Forms\AllClientsDataBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllClientsDataBase.Designer.cs">
+    <Compile Include="Forms\AllClientsDataBase.Designer.cs">
       <DependentUpon>AllClientsDataBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllReservationsDataBase.cs">
+    <Compile Include="Forms\AllReservationsDataBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllReservationsDataBase.Designer.cs">
+    <Compile Include="Forms\AllReservationsDataBase.Designer.cs">
       <DependentUpon>AllReservationsDataBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="AllRoomsDataBase.cs">
+    <Compile Include="Forms\AllRoomsDataBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AllRoomsDataBase.Designer.cs">
+    <Compile Include="Forms\AllRoomsDataBase.Designer.cs">
       <DependentUpon>AllRoomsDataBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientForm.cs">
+    <Compile Include="Classes\Client.cs" />
+    <Compile Include="Forms\ClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ClientForm.Designer.cs">
+    <Compile Include="Forms\ClientForm.Designer.cs">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBase.cs">
+    <Compile Include="Forms\DataBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataBase.Designer.cs">
+    <Compile Include="Forms\DataBase.Designer.cs">
       <DependentUpon>DataBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\EditRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\EditRoomForm.Designer.cs">
+      <DependentUpon>EditRoomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reservation.cs" />
-    <Compile Include="ReservationDataBase.cs">
+    <Compile Include="Classes\Reservation.cs" />
+    <Compile Include="Forms\ReservationDataBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReservationDataBase.Designer.cs">
+    <Compile Include="Forms\ReservationDataBase.Designer.cs">
       <DependentUpon>ReservationDataBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReservationForm.cs">
+    <Compile Include="Forms\ReservationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ReservationForm.Designer.cs">
+    <Compile Include="Forms\ReservationForm.Designer.cs">
       <DependentUpon>ReservationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReservedRooms.cs" />
-    <Compile Include="Room.cs" />
-    <Compile Include="RoomForm.cs">
+    <Compile Include="Classes\ReservedRooms.cs" />
+    <Compile Include="Classes\Room.cs" />
+    <Compile Include="Forms\RoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RoomForm.Designer.cs">
+    <Compile Include="Forms\RoomForm.Designer.cs">
       <DependentUpon>RoomForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Type.cs" />
-    <EmbeddedResource Include="AllClientsDataBase.resx">
+    <Compile Include="Classes\Type.cs" />
+    <EmbeddedResource Include="Forms\AllClientsDataBase.resx">
       <DependentUpon>AllClientsDataBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllReservationsDataBase.resx">
+    <EmbeddedResource Include="Forms\AllReservationsDataBase.resx">
       <DependentUpon>AllReservationsDataBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AllRoomsDataBase.resx">
+    <EmbeddedResource Include="Forms\AllRoomsDataBase.resx">
       <DependentUpon>AllRoomsDataBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientForm.resx">
+    <EmbeddedResource Include="Forms\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DataBase.resx">
+    <EmbeddedResource Include="Forms\DataBase.resx">
       <DependentUpon>DataBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\EditRoomForm.resx">
+      <DependentUpon>EditRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -140,13 +149,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReservationDataBase.resx">
+    <EmbeddedResource Include="Forms\ReservationDataBase.resx">
       <DependentUpon>ReservationDataBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReservationForm.resx">
+    <EmbeddedResource Include="Forms\ReservationForm.resx">
       <DependentUpon>ReservationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RoomForm.resx">
+    <EmbeddedResource Include="Forms\RoomForm.resx">
       <DependentUpon>RoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DatabaseHotelBooking.db">

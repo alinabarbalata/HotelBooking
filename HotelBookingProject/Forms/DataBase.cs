@@ -17,6 +17,7 @@ namespace HotelBookingProject
             InitializeComponent();
         }
 
+        #region Events
         private void btnAdd_Click(object sender, EventArgs e)
         {
             RoomForm roomForm = new RoomForm();
@@ -40,5 +41,6 @@ namespace HotelBookingProject
             AllClientsDataBase allClientsDataBase = new AllClientsDataBase();
             allClientsDataBase.ShowDialog();
         }
+#endregion
     }
 }

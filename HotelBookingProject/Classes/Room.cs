@@ -6,30 +6,18 @@ using System.Threading.Tasks;
 
 namespace HotelBookingProject
 {
-    internal class Room
+    public class Room
     {
         #region Attributes
         public long IdRoom { get; set; }
-        private string roomName;
+        public string RoomName;
         private bool isAvailable;
         public string Description { get; set; }
         public float Price { get; set; }
         private Type type;
+        
         #endregion
 
-        public string RoomName
-        {
-            get
-            {
-                return roomName;
-            }
-            set
-            {
-                StringBuilder sb = new StringBuilder("Room ");
-                sb.Append(value);
-                roomName = sb.ToString();
-            }
-        }
         public string GetAvailability()
         {
             if (isAvailable == true) return "Available";

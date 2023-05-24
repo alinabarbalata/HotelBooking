@@ -5,6 +5,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HotelBookingProject
 {
@@ -15,15 +16,21 @@ namespace HotelBookingProject
         private long IdClient { get; set; }
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
-        public int Days { get; set; }
-        public int TotalCost { get; }
+        private int days;
+        public int GetDays()
+        {
+            SetDays();
+            return days;
+        }
+        public void SetDays()
+        {
+            days = (CheckOut - CheckIn).Days;
+        }
+        //public int TotalCost { get; set; }
 
 
         #region Methods
-        public void ComputeReservationPeriod()
-        {
-            Days = (CheckOut - CheckIn).Days;
-        }
+        
         //public void ComputeTotalCost(ReservedRooms[] reservedRooms)
         //{
         //    TotalCost = 0;
@@ -38,6 +45,7 @@ namespace HotelBookingProject
             CheckIn = checkIn;
             CheckOut = checkOut;
             IdClient = idClient;
+            days = GetDays();
         }
 
     }
